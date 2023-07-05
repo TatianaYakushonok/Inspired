@@ -15,9 +15,11 @@ const Footer = () => {
             <div className={style.categoryList}>
 
               <ul className={style.categorySublist}>
-                <li className={style.categorySubtitle}>
+
+                <h4 className={style.categorySubtitle}>
                   Женщины
-                </li>
+                </h4>
+
                 <li><a href="#!" className={style.link}>Бюстгальтеры</a></li>
                 <li><a href="#!" className={style.link}>Трусы</a></li>
                 <li><a href="#!" className={style.link}>Носки</a></li>
@@ -27,9 +29,11 @@ const Footer = () => {
               </ul>
 
               <ul className={style.categorySublist}>
-                <li className={style.categorySubtitle}>
+
+                <h4 className={style.categorySubtitle}>
                   Мужчины
-                </li>
+                </h4>
+                
                 <li><a href="#!" className={style.link}>Трусы</a></li>
                 <li><a href="#!" className={style.link}>Носки</a></li>
                 <li><a href="#!" className={style.link}>Халаты</a></li>
