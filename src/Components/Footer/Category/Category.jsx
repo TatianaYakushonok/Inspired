@@ -1,5 +1,23 @@
+import { NavLink } from 'react-router-dom';
 import style from './Category.module.scss';
 import cn from 'classnames';
+
+export const list = [
+  {link: 'women', title: 'Женщины', categories: [
+    {link: 'bras', title: 'Бустгалтеры'},
+    {link: 'panties', title: 'Трусы'},
+    {link: 'socks', title: 'Носки'},
+    {link: 'bathrobes', title: 'Халаты'},
+    {link: 'thermal', title: 'Термобелье'},
+    {link: 'pijamas', title: 'Пижамы'},
+  ]},
+  {link: 'men', title: 'Мужчины', categories: [
+    {link: 'panties', title: 'Трусы'},
+    {link: 'socks', title: 'Носки'},
+    {link: 'bathrobes', title: 'Халаты'},
+    {link: 'thermal', title: 'Термобелье'},
+  ]}
+]
 
 const Category = () => {
   return ( 
@@ -7,36 +25,28 @@ const Category = () => {
 
       <h3 className={cn(style.title, style.categoryTitle)}>каталог</h3>
 
-      <div className={style.categoryList}>
+        <ul className={style.categoryList}>
 
-        <ul className={style.categorySublist}>
-
-          <h4 className={style.categorySubtitle}>
-            Женщины
-          </h4>
-
-          <li><a href="#!" className={style.link}>Бюстгальтеры</a></li>
-          <li><a href="#!" className={style.link}>Трусы</a></li>
-          <li><a href="#!" className={style.link}>Носки</a></li>
-          <li><a href="#!" className={style.link}>Халаты</a></li>
-          <li><a href="#!" className={style.link}>Термобелье</a></li>
-          <li><a href="#!" className={style.link}>Пижамы</a></li>
-        </ul>
-
-        <ul className={style.categorySublist}>
-
-          <h4 className={style.categorySubtitle}>
-            Мужчины
-          </h4>
+          {list.map(item => (
+            <li key={item.link} className={style.categoryItem}>
           
-          <li><a href="#!" className={style.link}>Трусы</a></li>
-          <li><a href="#!" className={style.link}>Носки</a></li>
-          <li><a href="#!" className={style.link}>Халаты</a></li>
-          <li><a href="#!" className={style.link}>Термобелье</a></li>
+              <h4 className={style.categorySubtitle}>
+                <NavLink to={item.link} className={style.link}>{item.title}</NavLink>
+              </h4>
+
+              <ul className={style.categorySublist}>
+                {item.categories.map(category => (
+                  <li key={category.link}>
+                    <NavLink to={`${item.link}/${category.link}`} className={style.link}>
+                      {category.title}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+
         </ul>
-
-      </div>
-
     </div>
   );
 }
