@@ -3,14 +3,21 @@ import style from './Category.module.scss';
 import cn from 'classnames';
 
 const Category = ({ list }) => {
+
+  const location = useLocation();
+  const gender = location.pathname.split('/')[1] || 'women';
+  const categoriesList = list.find(item => item.link === gender);
+  
   return ( 
     <ul className={style.category}>
-      {list.map(item => (
-        item.categories.map(category => (
-          <li key={category.link} className={style.item}>
-            <NavLink to={`${item.link}/${category.link}`} className={({ isActive }) => cn(style.link, isActive && style.linkActive)}>{category.title}</NavLink>
-          </li>
-        ))
+      {categoriesList.categories.map(item => (
+        <li key={item.link} className={style.item}>
+          <NavLink 
+            to={`${gender}/${item.link}`} 
+            className={({ isActive }) => cn(style.link, isActive && style.linkActive)}>
+              {item.title}
+          </NavLink>
+        </li>
       ))}
     </ul>
   );
