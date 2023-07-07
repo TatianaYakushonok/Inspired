@@ -4,6 +4,9 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import Root from "./routes/Root";
 import MainPage from "./MainPage/MainPage";
 import ErrorPage from "./ErrorPage/ErrorPage";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchNavigation } from "./features/navigationSlice";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +21,12 @@ const router = createBrowserRouter(
   )
 )
 
-const App = () => <RouterProvider router={router}></RouterProvider>
+const App = () => {
+  const dispach = useDispatch();
+  useEffect(() => {
+    dispach(fetchNavigation());
+  }, [dispach]);
+  return <RouterProvider router={router}></RouterProvider>
+}
 
 export default App;
