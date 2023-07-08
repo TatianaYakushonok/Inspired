@@ -1,11 +1,11 @@
 import Navigation from "./Navigation/Navigation";
 import Top from "./Top/Top";
 
-const Header = ({ list }) => {
+const Header = () => {
   return ( 
     <header>
       <Top />
-      <Navigation list = {list} />
+      <Navigation />
     </header>
   );
 }
