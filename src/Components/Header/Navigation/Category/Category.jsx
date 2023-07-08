@@ -3,7 +3,7 @@ import style from './Category.module.scss';
 import cn from 'classnames';
 import { useSelector } from 'react-redux';
 
-const Category = ({ list }) => {
+const Category = () => {
 
   const { activeGender, categories } = useSelector(state => state.navigation);
   

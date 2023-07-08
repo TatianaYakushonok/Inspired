@@ -1,8 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import style from './Category.module.scss';
 import cn from 'classnames';
+import { useSelector } from 'react-redux';
 
-const Category = ({ list }) => {
+const Category = () => {
+
+  const { genderList, categories } = useSelector(state => state.navigation);
+
   return ( 
     <div className={style.category}>
 
@@ -10,17 +14,17 @@ const Category = ({ list }) => {
 
         <ul className={style.categoryList}>
 
-          {list.map(item => (
-            <li key={item.link} className={style.categoryItem}>
+          {genderList.map(gender => (
+            <li key={gender} className={style.categoryItem}>
           
               <h4 className={style.categorySubtitle}>
-                <NavLink to={item.link} className={style.link}>{item.title}</NavLink>
+                <NavLink to={gender} className={style.link}>{categories[gender].title}</NavLink>
               </h4>
 
               <ul className={style.categorySublist}>
-                {item.categories.map(category => (
-                  <li key={category.link}>
-                    <NavLink to={`${item.link}/${category.link}`} className={style.link}>
+                {categories[gender]?.list?.map(category => (
+                  <li key={category.slug}>
+                    <NavLink to={`${gender}/${category.slug}`} className={style.link}>
                       {category.title}
                     </NavLink>
                   </li>

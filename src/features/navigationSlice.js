@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CATEGORIES_URL } from "../const.js";
+import { CATEGORIES_URL, COLORS_URL } from "../const.js";
 
 export const fetchNavigation = createAsyncThunk(
   'navigation/fetchNavigation',
