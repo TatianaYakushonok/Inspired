@@ -13,15 +13,9 @@ export const fetchColor = createAsyncThunk(
 const colorSlice = createSlice({
   name: 'color',
   initialState: {
-    activeColor: 'black',
     status: 'Idle',
     colorsList: [],
     error: null,
-  },
-  reducers: {
-    setActiveGender: (state, action) => {
-      state.activeColor = action.payload;
-    }
   },
   extraReducers: (builder) => {
     builder
@@ -31,7 +25,6 @@ const colorSlice = createSlice({
       .addCase(fetchColor.fulfilled, (state, action) => {
         state.status = 'success';
         state.colorsList = action.payload;
-        //state.colorsList = Object.keys(action.payload);
       })
       .addCase(fetchColor.rejected, (state, action) => {
         state.status = 'failed';
@@ -39,7 +32,5 @@ const colorSlice = createSlice({
       })
   }
 })
-
-export const { setActiveColor } = colorSlice.actions;
 
 export default colorSlice.reducer;

@@ -4,7 +4,7 @@ import colorsReducer from './features/colorSlice';
 
 const rootReducer = combineReducers({
   navigation: navigationReducer,
-  colorsList: colorsReducer,
+  color: colorsReducer,
 })
 
 export default rootReducer;
