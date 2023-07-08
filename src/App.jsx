@@ -23,11 +23,11 @@ const router = createBrowserRouter(
 )
 
 const App = () => {
-  const dispach = useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispach(fetchNavigation());
-    dispach(fetchColor());
-  }, [dispach]);
+    dispatch(fetchNavigation());
+    dispatch(fetchColor());
+  }, [dispatch]);
   return <RouterProvider router={router}></RouterProvider>
 }
 
