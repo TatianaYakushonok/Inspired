@@ -7,7 +7,7 @@ const Gender = () => {
 
   const {activeGender, genderList, categories} = useSelector(state => state.navigation);
 
-  return ( 
+  return (
     <ul className={style.gender}>
       {genderList.map(gender => (
         <li key={gender} className={style.item}>

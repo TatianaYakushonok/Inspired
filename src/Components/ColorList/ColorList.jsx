@@ -10,7 +10,6 @@ const ColorList = ({ colors }) => {
     <ul className={style.colorList}>
       {colors.map((id, i) =>{
         const color = colorsList.find(color => color.id === id);
-        console.log(color);
         return <Color key={id} color={color?.code} check={!i} />
       })}
     </ul>
