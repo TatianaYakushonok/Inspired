@@ -12,7 +12,7 @@ const Category = () => {
       {categories[activeGender]?.list?.map(item => (
         <li key={item.slug} className={style.item}>
           <NavLink 
-            to={`${activeGender}/${item.slug}`} 
+            to={`/catalog/${activeGender}/${item.slug}`} 
             className={({ isActive }) => cn(style.link, isActive && style.linkActive)}>
               {item.title}
           </NavLink>

@@ -11,7 +11,7 @@ const Gender = () => {
     <ul className={style.gender}>
       {genderList.map(gender => (
         <li key={gender} className={style.item}>
-          <NavLink to={gender} className={({ isActive }) => 
+          <NavLink to={`/catalog/${gender}`} className={({ isActive }) => 
           cn(style.link, (isActive || gender === activeGender) && style.linkActive)}>
             {categories[gender].title}
           </NavLink>

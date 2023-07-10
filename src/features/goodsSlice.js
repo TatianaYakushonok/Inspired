@@ -1,10 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GOODS_URL } from "../const";
 
-export const fetchGoods = createAsyncThunk(
-  'googs/fetchGoods',
+export const fetchGender = createAsyncThunk(
+  'googs/fetchGender',
   async (gender) => {
-    const response = await fetch(`${GOODS_URL}?gender=${gender}`);
+    const url = new URL(GOODS_URL);
+    url.searchParams.append('gender', gender);
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  }
+)
+
+export const fetchCategory = createAsyncThunk(
+  'googs/fetchCategory',
+  async (param) => {
+    const url = new URL(GOODS_URL);
+    for(let key in param) {
+      url.searchParams.append(key, param[key]);
+    }
+    const response = await fetch(url);
     const data = await response.json();
     return data;
   }
@@ -15,18 +30,35 @@ const goodsSlice = createSlice({
   initialState: {
     status: 'Idle',
     goodsList: [],
+    page: 0,
+    pages: 0,
+    totalCount: null,
     error: null,
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchGoods.pending, (state) => {
+      .addCase(fetchGender.pending, (state) => {
         state.status = 'Loading';
       })
-      .addCase(fetchGoods.fulfilled, (state, action) => {
+      .addCase(fetchGender.fulfilled, (state, action) => {
         state.status = 'success';
         state.goodsList = action.payload;
       })
-      .addCase(fetchGoods.rejected, (state, action) => {
+      .addCase(fetchGender.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(fetchCategory.pending, (state) => {
+        state.status = 'Loading';
+      })
+      .addCase(fetchCategory.fulfilled, (state, action) => {
+        state.status = 'success';
+        state.goodsList = action.payload.goods;
+        state.page = action.payload.page;
+        state.pages = action.payload.pages;
+        state.totalCount = action.payload.totalCount;
+      })
+      .addCase(fetchCategory.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })

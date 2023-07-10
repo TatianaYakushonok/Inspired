@@ -18,13 +18,13 @@ const Category = () => {
             <li key={gender} className={style.categoryItem}>
           
               <h4 className={style.categorySubtitle}>
-                <NavLink to={gender} className={style.link}>{categories[gender].title}</NavLink>
+                <NavLink to={`/catalog/${gender}`} className={style.link}>{categories[gender].title}</NavLink>
               </h4>
 
               <ul className={style.categorySublist}>
                 {categories[gender]?.list?.map(category => (
                   <li key={category.slug}>
-                    <NavLink to={`${gender}/${category.slug}`} className={style.link}>
+                    <NavLink to={`/catalog/${gender}/${category.slug}`} className={style.link}>
                       {category.title}
                     </NavLink>
                   </li>
