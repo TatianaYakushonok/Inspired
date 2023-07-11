@@ -6,21 +6,17 @@ import Contacts from './Contacts/Contacts';
 import Copyright from './Copyright/Copyright';
 import Development from './Development/Development';
 
-const Footer = ({ list }) => {
+const Footer = () => {
   return ( 
     <footer>
       <Container className={style.container}>
-
         <div className={style.footerContainer}>
-
-          <Category list={list} />
+          <Category />
           <Social />
           <Contacts />
           <Copyright />
           <Development />
-
         </div>
-
       </Container>
     </footer>
   );
