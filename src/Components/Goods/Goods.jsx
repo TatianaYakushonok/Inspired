@@ -19,7 +19,7 @@ const Goods = ({ categoryData }) => {
               </li>)}
           </ul>
         </Container>
-      </section>
+    </section>
   );
 }
 
