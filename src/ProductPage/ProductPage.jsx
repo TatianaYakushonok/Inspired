@@ -10,12 +10,15 @@ import ColorList from '../Components/ColorList/ColorList';
 import ProductSize from '../Components/ProductSize/ProductSize';
 import { ReactComponent as Like } from '../assets/img/Heart.svg';
 import Count from '../Components/Count/Count';
+import Goods from '../Components/Goods/Goods';
+import { fetchCategory } from '../features/goodsSlice';
 
 const ProductPage = () => {
 
   const dispatch = useDispatch();
   const { id } = useParams();
   const { product } = useSelector(state => state.product);
+  const { gender, category } = product;
   const [ count, setCount ] = useState(1);
   const [ celectedColor, setSelectedColor] = useState('');
   const [ celectedSize, setSelectedSize] = useState('');
@@ -42,63 +45,70 @@ const ProductPage = () => {
     dispatch(fetchProduct(id));
   }, [id, dispatch])
 
-  return ( 
-    <section className={style.card}>
-      <Container className={style.container}>
+  useEffect(() => {
+    dispatch(fetchCategory({ gender, category, count: 4, top: true, exclude: id }));
+  }, [gender, category, id, dispatch])
 
-        <img className={style.image} src={`${API_URL}/${product.pic}`} alt={product.title} />
+  return (
+    <>
+      <section className={style.card}>
+        <Container className={style.container}>
 
-        <form action="#" className={style.content}>
-          <h2 className={style.title}>{product.title}</h2>
-          <p className={style.price}>руб {product.price}</p>
+          <img className={style.image} src={`${API_URL}/${product.pic}`} alt={product.title} />
 
-          <div className={style.vendorCode}>
-            <span className={style.subtitle}>Артикул:</span>
-            <span className={style.id}>{product.id}</span>
-          </div>
+          <form action="#" className={style.content}>
+            <h2 className={style.title}>{product.title}</h2>
+            <p className={style.price}>руб {product.price}</p>
 
-          <div className={style.color}>
-            <p className={cn(style.subtitle, style.colorTitle)}>Цвет:</p>
-            <ColorList 
-              colors={product.colors} 
-              celectedColor={celectedColor} 
-              handleColorChang={handleColorChang} 
-            />
-          </div>
+            <div className={style.vendorCode}>
+              <span className={style.subtitle}>Артикул:</span>
+              <span className={style.id}>{product.id}</span>
+            </div>
 
-          <ProductSize size={product.size}
-                      check={product.size}
-                      celectedSize={celectedSize}
-                      handleSizeChang={handleSizeChang} 
-          />
+            <div className={style.color}>
+              <p className={cn(style.subtitle, style.colorTitle)}>Цвет:</p>
+              <ColorList 
+                colors={product.colors} 
+                celectedColor={celectedColor} 
+                handleColorChang={handleColorChang} 
+              />
+            </div>
 
-          <div className={style.description}>
-            <p className={cn(style.subtitle, style.descriptionTitle)}>Описание:</p>
-            <p className={style.descriptionText}>{product.description}</p>
-          </div>
-
-          <div className={style.control}>
-
-            <Count className={style.count}
-                  count={count}
-                  handleIncrement={handleIncrement}
-                  handleDecrement={handleDecrement}
+            <ProductSize size={product.size}
+                        check={product.size}
+                        celectedSize={celectedSize}
+                        handleSizeChang={handleSizeChang} 
             />
 
-            <button className={style.addCart} type="submit">В корзину</button>
+            <div className={style.description}>
+              <p className={cn(style.subtitle, style.descriptionTitle)}>Описание:</p>
+              <p className={style.descriptionText}>{product.description}</p>
+            </div>
 
-            <button 
-              className={style.favorite} 
-              aria-label="Добавить в избранное" 
-              type="button"
-            >
-              <Like />
-            </button>
-          </div>
+            <div className={style.control}>
 
-        </form>
-      </Container>
-    </section>
+              <Count className={style.count}
+                    count={count}
+                    handleIncrement={handleIncrement}
+                    handleDecrement={handleDecrement}
+              />
+
+              <button className={style.addCart} type="submit">В корзину</button>
+
+              <button 
+                className={style.favorite} 
+                aria-label="Добавить в избранное" 
+                type="button"
+              >
+                <Like />
+              </button>
+            </div>
+
+          </form>
+        </Container>
+      </section>
+      <Goods title='Вам также может понравиться' />
+    </> 
   );
 }
 

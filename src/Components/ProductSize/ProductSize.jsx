@@ -6,7 +6,7 @@ const ProductSize = ({ check, size, celectedSize, handleSizeChang }) => {
   //<span className={style.check}></span>
   return ( 
     <div className={style.size}>
-      <h2 className={style.title}>Размер:</h2>
+      <p className={style.title}>Размер:</p>
 
       <ul className={style.list}>
         {size?.map(productSize => (
@@ -16,7 +16,7 @@ const ProductSize = ({ check, size, celectedSize, handleSizeChang }) => {
               name="size"
               id={productSize}
               value={productSize}
-              checked = {check ? celectedSize === productSize : check}
+              checked = {celectedSize === productSize}
               onChange={handleSizeChang} 
             />
             <label htmlFor={productSize} className={cn(style.item, style.check)}>{productSize}</label>
