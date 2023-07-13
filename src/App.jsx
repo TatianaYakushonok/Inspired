@@ -2,18 +2,22 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import Root from "./routes/Root";
 import MainPage from "./MainPage/MainPage";
 import ErrorPage from "./ErrorPage/ErrorPage";
+import ProductPage from "./ProductPage/ProductPage";
+import FavoritePage from "./FavoritePage/FavoritePage";
+import CartPage from "./CartPage/CartPage";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchNavigation } from "./features/navigationSlice";
 import { fetchColor } from "./features/colorSlice";
-import ProductPage from "./ProductPage/ProductPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<MainPage />} />
-      <Route path='product/:id' element={<ProductPage />} />
-      <Route path='catalog/:gender/:category?' element={<MainPage />} />
+      <Route path='/cart' element={<CartPage />} />
+      <Route path='/favorite' element={<FavoritePage />} />
+      <Route path='/product/:id' element={<ProductPage />} />
+      <Route path='/catalog/:gender/:category?' element={<MainPage />} />
       <Route path='*' element={<ErrorPage />} />
     </Route>
   )
