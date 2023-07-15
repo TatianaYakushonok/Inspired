@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { GOODS_URL } from "../const";
 
 export const fetchGender = createAsyncThunk(
-  'googs/fetchGender',
+  'goods/fetchGender',
   async (gender) => {
     const url = new URL(GOODS_URL);
     url.searchParams.append('gender', gender);
@@ -13,7 +13,7 @@ export const fetchGender = createAsyncThunk(
 )
 
 export const fetchCategory = createAsyncThunk(
-  'googs/fetchCategory',
+  'goods/fetchCategory',
   async (param) => {
     const url = new URL(GOODS_URL);
     for(let key in param) {
@@ -35,6 +35,11 @@ const goodsSlice = createSlice({
     totalCount: null,
     error: null,
   },
+  reducers: {
+    setPage: (state, action) => {
+      state.page = action.payload;
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchGender.pending, (state) => {
@@ -43,6 +48,8 @@ const goodsSlice = createSlice({
       .addCase(fetchGender.fulfilled, (state, action) => {
         state.status = 'success';
         state.goodsList = action.payload;
+        state.pages = 0;
+        state.totalCount = null;
       })
       .addCase(fetchGender.rejected, (state, action) => {
         state.status = 'failed';
@@ -54,7 +61,6 @@ const goodsSlice = createSlice({
       .addCase(fetchCategory.fulfilled, (state, action) => {
         state.status = 'success';
         state.goodsList = action.payload.goods;
-        state.page = action.payload.page;
         state.pages = action.payload.pages;
         state.totalCount = action.payload.totalCount;
       })
@@ -65,4 +71,5 @@ const goodsSlice = createSlice({
   }
 })
 
+export const { setPage } = goodsSlice.actions;
 export default goodsSlice.reducer;
