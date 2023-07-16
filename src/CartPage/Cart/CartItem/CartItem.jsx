@@ -15,6 +15,10 @@ const CartItem = ({ id, color, size, count, goodsList }) => {
     dispatch(addToCart({ id, color, size, count }));
   }
 
+  const handleRemoveItem = () => {
+    dispatch(removeFromCart({ id, color, size }));
+  }
+
   return ( 
     <article className={style.item}>
       <img className={style.image} src={`${API_URL}/${item?.pic}`} alt={item?.title} />
@@ -49,10 +53,7 @@ const CartItem = ({ id, color, size, count, goodsList }) => {
       <button 
         className={style.del} 
         area-lable="Удалить товар из корзины"
-        onClick={(e) => {
-          e.preventDefault();
-          dispatch(removeFromCart({id, color, size}));
-        }}>
+        onClick={handleRemoveItem}>
       </button>
       <Count 
         classNames={style.count} 
