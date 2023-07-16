@@ -21,7 +21,7 @@ const FavoritePage = () => {
   }, [favorites, page, dispatch])
 
   return (
-    <Goods title='Избранные товары' />
+    <Goods title='Избраннoe' />
   );
 }
 

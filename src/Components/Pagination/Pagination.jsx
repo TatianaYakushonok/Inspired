@@ -42,7 +42,7 @@ const Pagination = () => {
         <li key={i} className={style.item}>
           <NavLink
             to={`${pathname}?page=${i}`}
-            className={cn(style.link, i === pagePagination ?? style.linkActive)}
+            className={cn(style.link, (pagePagination ? i === pagePagination : i === pagePagination + 1) && style.linkActive)}
             onClick={() => handlePageChange(i)}
           >
             {i}
@@ -58,7 +58,7 @@ const Pagination = () => {
     pages > 1 &&
     <div className={style.pagination}>
       <button
-        className={style.arrow} 
+        className={pages > 2 ? style.arrow : style.hidden}
         onClick={handlePrevPage}
         disabled={pagePagination <= 2}
       >
@@ -70,7 +70,7 @@ const Pagination = () => {
       </ul>
 
       <button 
-        className={style.arrow}
+        className={pages > 2 ? style.arrow : style.hidden}
         onClick={handleNextPage}
         disabled={pagePagination >= pages - 1 || pages <= 3}
       >

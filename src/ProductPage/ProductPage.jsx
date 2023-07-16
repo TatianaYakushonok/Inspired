@@ -12,13 +12,15 @@ import Count from '../Components/Count/Count';
 import Goods from '../Components/Goods/Goods';
 import { fetchCategory } from '../features/goodsSlice';
 import BtnLike from '../Components/BtnLike/BtnLike';
+import { addToCart } from '../features/cartSlice';
 
 const ProductPage = () => {
 
   const dispatch = useDispatch();
   const { id } = useParams();
   const { product } = useSelector(state => state.product);
-  const { gender, category } = product;
+  const { gender, category, colors } = product;
+  const { colorsList } = useSelector(state => state.color);
   const [ count, setCount ] = useState(1);
   const [ celectedColor, setSelectedColor] = useState('');
   const [ celectedSize, setSelectedSize] = useState('');
@@ -43,11 +45,17 @@ const ProductPage = () => {
 
   useEffect(() => {
     dispatch(fetchProduct(id));
-  }, [id, dispatch])
+  }, [id, dispatch]);
 
   useEffect(() => {
     dispatch(fetchCategory({ gender, category, count: 4, top: true, exclude: id }));
-  }, [gender, category, id, dispatch])
+  }, [gender, category, id, dispatch]);
+
+  useEffect(() => {
+    if (colorsList?.length && colors?.length) {
+      setSelectedColor(colorsList.find(color => color.id === colors[0].title));
+    }
+  }, [colorsList, colors]);
 
   return (
     <>
@@ -56,7 +64,17 @@ const ProductPage = () => {
 
           <img className={style.image} src={`${API_URL}/${product.pic}`} alt={product.title} />
 
-          <form action="#" className={style.content}>
+          <form 
+            action="#" 
+            className={style.content} 
+            onSubmit={(e) => {
+              e.preventDefault();
+              dispatch(addToCart({
+                id, 
+                color: celectedColor, 
+                size: celectedSize, 
+                count}))
+            }}>
             <h2 className={style.title}>{product.title}</h2>
             <p className={style.price}>руб {product.price}</p>
 
@@ -68,9 +86,9 @@ const ProductPage = () => {
             <div className={style.color}>
               <p className={cn(style.subtitle, style.colorTitle)}>Цвет:</p>
               <ColorList 
-                colors={product.colors} 
+                colors={colors} 
                 celectedColor={celectedColor} 
-                handleColorChang={handleColorChang} 
+                handleColorChang={handleColorChang}
               />
             </div>
 
