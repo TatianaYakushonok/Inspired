@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 const Top = () => {
 
-  const { cartItems } = useSelector(state => state.cart);
+  const { countItems } = useSelector(state => state.cart);
 
   return ( 
     <div className={style.top}>
@@ -30,7 +30,7 @@ const Top = () => {
             </li>
             <li className={style.navItem}>
               <NavLink to="/cart" className={style.topLink}>
-                <div className={style.topLinkCount}>{cartItems.length}</div>
+                <span className={style.topLinkCount}>{countItems}</span>
                 <CartSVG />
               </NavLink>
             </li>
