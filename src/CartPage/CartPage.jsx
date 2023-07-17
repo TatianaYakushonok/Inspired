@@ -22,7 +22,7 @@ const CartPage = () => {
   return (
     <>
       <Cart cartItems={cartItems} goodsList={goodsList} />
-      <Order cartItems={cartItems} goodsList={goodsList} />
+      <Order cartItems={cartItems} />
     </>
   );
 }

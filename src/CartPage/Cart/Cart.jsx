@@ -5,15 +5,16 @@ import Container from '../../Components/Layout/Container/Container';
 
 const Cart = ({ cartItems, goodsList }) => {
   
-  let totalPrice = 0;
+  const totalPrice = cartItems.reduce((sum, item) => {
+    const product = goodsList.find(product => product.id === item.id);
 
-  cartItems.map(itemCart => {
-    goodsList.map(itemGoods => {
-      if (itemCart.id === itemGoods.id) {
-        return totalPrice += itemGoods.price;
-      }
-    })
-  });
+    if (product) {
+      return sum + (product.price * item.count);
+    } else {
+      return sum;
+    }
+
+  }, 0)
 
   return (
     <section className={style.cart}>
@@ -27,7 +28,7 @@ const Cart = ({ cartItems, goodsList }) => {
               </li>
             ))}
           </ul>
-          : <h3>В корзине пусто</h3>
+          : <h3 className={style.empty}>В корзине пусто</h3>
         }
 
         <div className={style.total}>
