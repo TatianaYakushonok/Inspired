@@ -3,8 +3,7 @@ import Gender from "./Gender/Gender";
 import Container from "../../Layout/Container/Container";
 
 const Navigation = () => {
-  
-  return ( 
+  return (
     <nav>
       <Container>
         <Gender />

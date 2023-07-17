@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import style from './Cart.module.scss';
 import CartItem from './CartItem/CartItem';
 import Container from '../../Components/Layout/Container/Container';

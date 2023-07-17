@@ -5,6 +5,7 @@ import ErrorPage from "./ErrorPage/ErrorPage";
 import ProductPage from "./ProductPage/ProductPage";
 import FavoritePage from "./FavoritePage/FavoritePage";
 import CartPage from "./CartPage/CartPage";
+import SearchPage from "./SearchPage/SearchPage";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchNavigation } from "./features/navigationSlice";
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<MainPage />} />
+      <Route path='/search' element={<SearchPage />} />
       <Route path='/cart' element={<CartPage />} />
       <Route path='/favorite' element={<FavoritePage />} />
       <Route path='/product/:id' element={<ProductPage />} />
